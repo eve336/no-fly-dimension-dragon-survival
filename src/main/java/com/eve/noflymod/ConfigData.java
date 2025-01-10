@@ -1,5 +1,6 @@
 package com.eve.noflymod;
 
+import com.eve.noflymod.belt.ToolBeltItem;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import net.minecraft.resources.ResourceLocation;
@@ -8,6 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -70,11 +72,18 @@ public class ConfigData
     public static ThreeWayChoice customBeltSlotMode = ThreeWayChoice.AUTO;
     public static boolean customBeltSlotEnabled = true;
 
+    public static boolean curiosPresent()
+    {
+        return ModList.get().isLoaded("curios");
+    }
 
+    public static boolean sewingKitPresent()
+    {
+        return ModList.get().isLoaded("sewingkit");
+    }
 
     public static class ServerConfig
     {
-        // TODO config list
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> whitelist;
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> blacklist;
 
@@ -178,6 +187,23 @@ public class ConfigData
         displayEmptySlots = CLIENT.displayEmptySlots.get();
     }
 
+    public static void refreshCommon()
+    {
+        enableSewingKitSupport = COMMON.enableSewingKitSupport.get();
+
+        anvilUpgrading = COMMON.anvilUpgrading.get();
+        enableAnvilUpgrading = anvilUpgrading == ThreeWayChoice.ON ||
+                (anvilUpgrading == ThreeWayChoice.AUTO && !sewingKitPresent());
+
+        gridCrafting = COMMON.gridCrafting.get();
+        enableNormalCrafting = gridCrafting == ThreeWayChoice.ON ||
+                (gridCrafting == ThreeWayChoice.AUTO && !sewingKitPresent());
+
+        customBeltSlotMode = COMMON.customBeltSlotMode.get();
+        customBeltSlotEnabled = customBeltSlotMode == ThreeWayChoice.ON ||
+                (customBeltSlotMode == ThreeWayChoice.AUTO && !curiosPresent());
+    }
+
     public static void refreshServer()
     {
         blackList = SERVER.blacklist.get().stream().map(ConfigData::parseItemStack).collect(Collectors.toSet());
@@ -189,6 +215,7 @@ public class ConfigData
         Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemString));
         if (item == null || item == Items.AIR)
         {
+            ToolBelt.logger.warn("Could not find item " + itemString);
             return ItemStack.EMPTY;
         }
 
@@ -206,6 +233,8 @@ public class ConfigData
         if (blackList.stream().anyMatch((s) -> ItemStack.isSame(s, stack)))
             return false;
 
+        if (stack.getItem() instanceof ToolBeltItem)
+            return false;
 
         if (stack.getMaxStackSize() != 1)
             return false;

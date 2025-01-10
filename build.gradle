@@ -14,10 +14,6 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'maven-publish'
 
 repositories {
-    flatDir {
-        dir 'C:/libs'
-    }
-    flatDir { dir 'libs' }
     maven { // JEI
         url "https://dvs1.progwml6.com/files/maven/"
     }
@@ -137,7 +133,7 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-1.19.1-forge-api:11.2.0.244")
     runtimeOnly fg.deobf("mezz.jei:jei-1.19.1-forge:11.2.0.244")
 
-    implementation fg.deobf("libs:dragonsurvival:${dragonsurvival_version}")
+    implementation("curse.maven:dragons-survival-420799:5908922")
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.2-5.1.1.0")
     //runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.2-5.1.1.0")
@@ -146,7 +142,7 @@ dependencies {
 }
 
 project.afterEvaluate {
-    task copyMods(type: Copy) {
+    task copyMods(type:Copy) {
         from configurations.runtimeMod.files
         into file("run/mods")
     }
@@ -163,12 +159,12 @@ jar {
 
     manifest {
         attributes([
-                "Specification-Title"     : "toolbelt",
-                "Specification-Vendor"    : "gigaherz",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : "${version}",
-                "Implementation-Vendor"   : "gigaherz",
+                "Specification-Title": "toolbelt",
+                "Specification-Vendor": "gigaherz",
+                "Specification-Version": "1", // We are version 1 of ourselves
+                "Implementation-Title": project.name,
+                "Implementation-Version": "${version}",
+                "Implementation-Vendor" :"gigaherz",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }

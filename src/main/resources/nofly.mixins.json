@@ -1,7 +1,4 @@
 {
   "required": true,
-  "package": "com.eve.noflymod.mixins",
-  "mixins": [
-    "noflymixin"
-  ]
+  "package": "com.eve.noflymod.mixins"
 }
