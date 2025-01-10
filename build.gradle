@@ -133,8 +133,6 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-1.19.1-forge-api:11.2.0.244")
     runtimeOnly fg.deobf("mezz.jei:jei-1.19.1-forge:11.2.0.244")
 
-    implementation("curse.maven:dragons-survival-420799:5908922")
-
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.2-5.1.1.0")
     //runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.2-5.1.1.0")
 
