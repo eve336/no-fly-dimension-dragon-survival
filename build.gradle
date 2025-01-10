@@ -14,6 +14,14 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'maven-publish'
 
 repositories {
+    maven {
+        name = "Gecholib maven"
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+    }
+    flatDir {
+        dir 'C:/libs'
+    }
+    flatDir { dir 'libs' }
     maven { // JEI
         url "https://dvs1.progwml6.com/files/maven/"
     }
@@ -123,7 +131,7 @@ configurations {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.2-43.1.3'
+    minecraft "net.minecraftforge:forge:$mc_version-$forge_version"
 
     compileOnly fg.deobf("dev.gigaherz.sewingkit:SewingKit-1.19.2:1.6.9")
     runtimeOnly fg.deobf("dev.gigaherz.sewingkit:SewingKit-1.19.2:1.6.9")
@@ -132,6 +140,10 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-1.19.1-common:11.2.0.244")
     compileOnly fg.deobf("mezz.jei:jei-1.19.1-forge-api:11.2.0.244")
     runtimeOnly fg.deobf("mezz.jei:jei-1.19.1-forge:11.2.0.244")
+
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${property('geckolib_mc_version')}:${property('geckolib_version')}")
+
+    implementation fg.deobf("libs:dragonsurvival:${dragonsurvival_version}")
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.2-5.1.1.0")
     //runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.2-5.1.1.0")

@@ -1,6 +1,6 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package dev.gigaherz.toolbelt.belt;
+package com.eve.noflydimensions;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

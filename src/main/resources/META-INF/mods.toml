@@ -4,7 +4,7 @@ license="BSD (3 clause)"
 issueTrackerURL="https://github.com/gigaherz/ToolBelt/issues"
 
 [[mods]]
-modId="toolbelt"
+modId="noflydimensions"
 version="${file.jarVersion}"
 displayName="Tool Belt"
 description='''
@@ -14,21 +14,21 @@ displayURL="https://github.com/gigaherz/ToolBelt"
 logoFile="logo.png"
 authors="gigaherz"
 
-[[dependencies.toolbelt]]
+[[dependencies.noflydimensions]]
    modId="forge"
    mandatory=true
    versionRange="[41.0.94,)"
    ordering="NONE"
    side="BOTH"
-[[dependencies.toolbelt]]
+[[dependencies.noflydimensions]]
    modId="minecraft"
    mandatory=true
    versionRange="[1.19,1.20)"
    ordering="NONE"
    side="BOTH"
-[[dependencies.toolbelt]]
-   modId="sewingkit"
-   mandatory=false
-   versionRange="[1.6.5,)"
+[[dependencies.noflydimensions]]
+   modId="dragonsurvival"
+   mandatory=true
+   versionRange="[1.5.57,)"
    ordering="NONE"
    side="BOTH"
