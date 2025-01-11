@@ -1,4 +1,4 @@
-Tool Belt
+Dragon Survival No fly dimensions
 =============
 
-A belt to carry your tools in.
+Adds a config so you cannot fly in certain dimensions
