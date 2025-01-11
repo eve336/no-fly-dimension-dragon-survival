@@ -6,12 +6,19 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7.+'
         classpath 'org.parchmentmc:librarian:1.+'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
+apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'maven-publish'
+
+mixin {
+    add sourceSets.main, "noflydimensions.refmap.json"
+    config 'noflydimensions.mixins.json'
+}
 
 repositories {
     maven {
@@ -135,6 +142,8 @@ dependencies {
 
     compileOnly fg.deobf("dev.gigaherz.sewingkit:SewingKit-1.19.2:1.6.9")
     runtimeOnly fg.deobf("dev.gigaherz.sewingkit:SewingKit-1.19.2:1.6.9")
+
+
 
     compileOnly fg.deobf("mezz.jei:jei-1.19.1-common-api:11.2.0.244")
     runtimeOnly fg.deobf("mezz.jei:jei-1.19.1-common:11.2.0.244")

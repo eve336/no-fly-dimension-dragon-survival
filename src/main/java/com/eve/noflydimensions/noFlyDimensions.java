@@ -53,7 +53,6 @@ public class noFlyDimensions
 
 
         modLoadingContext.registerConfig(ModConfig.Type.SERVER, ConfigData.SERVER_SPEC);
-        modLoadingContext.registerConfig(ModConfig.Type.CLIENT, ConfigData.CLIENT_SPEC);
         modLoadingContext.registerConfig(ModConfig.Type.COMMON, ConfigData.COMMON_SPEC);
 
     }
@@ -67,9 +66,7 @@ public class noFlyDimensions
     public void modConfig(ModConfigEvent event)
     {
         ModConfig config = event.getConfig();
-        if (config.getSpec() == ConfigData.CLIENT_SPEC)
-            ConfigData.refreshClient();
-        else if (config.getSpec() == ConfigData.COMMON_SPEC)
+        if (config.getSpec() == ConfigData.COMMON_SPEC)
             ConfigData.refreshCommon();
         else if (config.getSpec() == ConfigData.SERVER_SPEC)
             ConfigData.refreshServer();
